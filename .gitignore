@@ -106,3 +106,5 @@ dist
 # editor
 .vscode
 **.DS_Store
+
+.husky
