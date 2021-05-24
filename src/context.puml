@@ -1,15 +1,16 @@
-@startuml
+@startuml context
 !include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Context.puml
 
 LAYOUT_WITH_LEGEND()
 
-Person(pbc, "Visitor", "A visitor searching for jobs")
-System(ibs, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
-System_Ext(es, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-System_Ext(mbs, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+Person_Ext(visitor, "Visitor", "A job seeker searching for jobs.")
+Person(employer, "Employer", "An employer that wants to post a job.")
+System(asj, "Algeria Startup Jobs System", "Allows visitors to search for jobs.\nAllow Employers to submit job posts.")
+System_Ext(es, "E-mail system", "The internal NameCheap email system.")
 
-Rel(pbc, ibs, "Uses")
-Rel(es, pbc, "Sends e-mails to")
-Rel(ibs, es, "Sends e-mails", "SMTP")
-Rel(ibs, mbs, "Uses")
+Rel(visitor, asj, "Search for jobs in", "HTTPS")
+Rel(employer, asj, "Submit job offer to", "HTTPS")
+Rel(es, employer, "Sends e-mails to")
+Rel(asj, es, "Uses", "SMTP")
+
 @enduml
