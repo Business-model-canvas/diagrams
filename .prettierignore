@@ -1,0 +1,11 @@
+node_modules/
+dist
+
+.*
+*.puml
+*.svg
+*.jpeg
+*.png
+*.ico
+*.lock
+*.log
