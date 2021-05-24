@@ -1,6 +1,6 @@
 # diagrams
 
-C4 based diagrams of diagrams.algeriastartupjobs.com
+C4 based diagrams of [diagrams.algeriastartupjobs.com](https://diagrams.algeriastartupjobs.com)
 
 ## Get Started
 
