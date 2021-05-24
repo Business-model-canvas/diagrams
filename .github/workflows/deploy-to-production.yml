@@ -16,16 +16,25 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
       - name: "Install workspace dependencies"
         run: |
           yarn
+
       - name: "Build docs"
         run: |
           yarn build
 
+      - name: "upload to diagrams.algeriastartupjobs.com"
+        uses: weslenng/gcp-storage-sync@master
+        with:
+          args: -d
         env:
-          CI: true
+          GCP_SERVICE_ACCOUNT_KEY_FILE: ${{ secrets.GCP_SA_KEY }}
+          GCP_STORAGE_BUCKET: ${{ secrets.GCP_DIAGRAMS_BUCKET }}
+          SOURCE_DIR: "dist"
