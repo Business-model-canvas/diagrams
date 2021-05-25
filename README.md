@@ -1,4 +1,4 @@
-# diagrams
+# diagrams.algeriastartupjobs.com
 
 C4 based diagrams of [diagrams.algeriastartupjobs.com](https://diagrams.algeriastartupjobs.com)
 
@@ -34,7 +34,7 @@ yarn dev
 
 - For web server go to <http://localhost:3030>
 
-# meta
+## Meta
 
 This project was created using [c4builder](https://adrianvlupu.github.io/C4-Builder/)
 
