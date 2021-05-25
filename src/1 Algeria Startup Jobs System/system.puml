@@ -1,0 +1,31 @@
+@startuml system
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person_Ext(visitor, "Visitor", "A job seeker searching for jobs.")
+Person(employer, "Employer", "An employer that wants to post a job.")
+Person(admin, "Admin", "An Admin moderates content.")
+System_Ext(es, "E-mail system", "The internal NameCheap email system.")
+System_Boundary(asj, "Algeria Startup Jobs System") {
+  Container(pspa, "Public SPA", "React Redux Typescript", "Provides all job search functionalities to job seekers via their web browser.")
+  Container(espa, "Employer SPA", "React Redux Typescript", "Provides all job posting functionalities to Employers via their web browser.")
+  Container(aspa, "Admin SPA", "React Redux Typescript", "Provides all Content Management functionalities to Admins via their web browser.")
+  Container(mdb, "Main Database", "Relational Database Schema", "Stores user (Employer/Admin) registration information, hashed authentication credentials, access logs, job posts, etc.")
+  Container(sdb, "Search Database", "Text Search Database", "Stores Job posts searchable information.")
+  Container(api, "API Application", "Nodejs Express", "Provides all ASJ functionalities via a JSON/HTTPS API Following OpenApi specs.")
+
+  Rel(api, es, "Sends e-mails", "SMTP")
+  Rel(api, mdb, "Reads & writes to", "TCP")
+  Rel(api, sdb, "Reads & writes to", "TCP")
+  Rel(pspa, api, "Uses", "JSON/HTTPS")
+  Rel(espa, api, "Uses", "JSON/HTTPS")
+  Rel(aspa, api, "Uses", "JSON/HTTPS")
+}
+
+Rel(visitor, pspa, "Search for jobs in", "HTTPS")
+Rel(employer, espa, "Submit job offer to", "HTTPS")
+Rel(admin, aspa, "Moderate content in", "HTTPS")
+Rel(es, employer, "Sends e-mails to")
+Rel(es, admin, "Sends e-mails to")
+@enduml
